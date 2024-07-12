@@ -1,0 +1,38 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  build:
+    name: 'standard build'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout sources'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 'Set-up Node'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.14.0
+          cache: 'npm'
+
+      - name: 'Package installation'
+        run: |
+          npm ci
+
+      - name: 'Set-up SHAs for Nx'
+        uses: nrwl/nx-set-shas@v4
+
+      - name: 'Run build and tests on modified projects'
+        run: npx nx affected -t lint build

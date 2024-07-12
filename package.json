@@ -1,0 +1,15 @@
+{
+  "name": "elite-dangerous-astraeus",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {},
+  "private": true,
+  "devDependencies": {
+    "@nx/js": "19.2.2",
+    "@nxlv/python": "^18.1.0",
+    "nx": "19.2.2"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}

@@ -1,0 +1,59 @@
+[tool.coverage.run]
+branch = true
+source = ["src"]
+
+[tool.coverage.report]
+exclude_lines = ['if TYPE_CHECKING:']
+show_missing = true
+
+[tool.pytest.ini_options]
+addopts = "--cov --cov-report html:'../coverage/astraeus-common/html' --cov-report xml:'../coverage/astraeus-common/coverage.xml' --html='../reports/astraeus-common/unittests/html/index.html' --junitxml='../reports/astraeus-common/unittests/junit.xml'"
+
+[tool.poetry]
+name = "astraeus-common"
+version = "0.0.1"
+description = "common library for Astraeus application"
+authors = [
+    "sylvain-lavazais"
+]
+maintainers = [
+    "sylvain-lavazais"
+]
+license = 'GNU General Public License v3.0'
+readme = 'README.md'
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Build Tools",
+    "License :: OSI Approved :: GPL-v3",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3 :: Only",
+]
+
+[[tool.poetry.packages]]
+include = "src"
+
+[tool.poetry.dependencies]
+python = ">=3.12"
+yoyo-migrations = "8.2.*"
+psycopg2 = "2.9.*"
+psycopg2-binary = "2.9.*"
+structlog = "24.2.*"
+
+[tool.poetry.group.dev.dependencies]
+autopep8 = "2.0.2"
+flake8 = "6.0.0"
+pytest = "7.3.1"
+pytest-sugar = "0.9.7"
+pytest-cov = "4.1.0"
+pytest-html = "3.2.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
