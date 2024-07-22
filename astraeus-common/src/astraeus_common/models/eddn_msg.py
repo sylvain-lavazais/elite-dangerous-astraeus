@@ -1,15 +1,16 @@
 import json
 from datetime import datetime
+from typing import Optional, Dict
 from uuid import UUID
 
 
-class EddnMsg:
-    _id: UUID
-    _schema: str
-    _header: dict
-    _message: dict
-    _recv_date: datetime
-    _sync_date: datetime
+class EDDNMsg:
+    _id: Optional[UUID]
+    _schema: Optional[str]
+    _header: Optional[Dict]
+    _message: Optional[Dict]
+    _recv_date: Optional[datetime]
+    _sync_date: Optional[datetime]
 
     EDDN_MESSAGE_SELECT_BY_ID = '''
     select id, "schema", header, message, recv_date, sync_date
@@ -49,7 +50,7 @@ class EddnMsg:
     '''
 
     @property
-    def id(self) -> UUID:
+    def id(self) -> Optional[UUID]:
         return self._id
 
     @id.setter
@@ -57,7 +58,7 @@ class EddnMsg:
         self._id = value
 
     @property
-    def schema(self) -> str:
+    def schema(self) -> Optional[str]:
         return self._schema
 
     @schema.setter
@@ -65,7 +66,7 @@ class EddnMsg:
         self._schema = value
 
     @property
-    def header(self) -> dict:
+    def header(self) -> Optional[Dict]:
         return self._header
 
     @header.setter
@@ -73,7 +74,7 @@ class EddnMsg:
         self._header = value
 
     @property
-    def message(self) -> dict:
+    def message(self) -> Optional[Dict]:
         return self._message
 
     @message.setter
@@ -81,7 +82,7 @@ class EddnMsg:
         self._message = value
 
     @property
-    def recv_date(self) -> datetime:
+    def recv_date(self) -> Optional[datetime]:
         return self._recv_date
 
     @recv_date.setter
@@ -89,20 +90,20 @@ class EddnMsg:
         self._recv_date = value
 
     @property
-    def sync_date(self) -> datetime:
+    def sync_date(self) -> Optional[datetime]:
         return self._sync_date
 
     @sync_date.setter
     def sync_date(self, value: datetime):
         self._sync_date = value
 
-    def __init__(self, dict_from_db: dict = None,
-                 uuid: UUID = None,
-                 schema: str = None,
-                 header: dict = None,
-                 message: dict = None,
-                 recv_date: datetime = None,
-                 sync_date: datetime = None):
+    def __init__(self, dict_from_db: Optional[Dict] = None,
+                 uuid: Optional[UUID] = None,
+                 schema: Optional[str] = None,
+                 header: Optional[Dict] = None,
+                 message: Optional[Dict] = None,
+                 recv_date: Optional[datetime] = None,
+                 sync_date: Optional[datetime] = None):
         if dict_from_db is not None:
             uuid = dict_from_db.get('id', None)
             schema = dict_from_db.get('schema', None)
@@ -138,11 +139,11 @@ class EddnMsg:
         }
 
 
-def msg_from_eddn(eddn_recv: dict) -> EddnMsg:
+def msg_from_eddn(eddn_recv: dict) -> EDDNMsg:
     schema = eddn_recv.get('name', None)
     header = eddn_recv.get('type', None)
     message = eddn_recv.get('subType', None)
-    return EddnMsg(schema=schema,
+    return EDDNMsg(schema=schema,
                    header=header,
                    message=message,
                    )

@@ -5,12 +5,12 @@ PWD=$(shell pwd)
 ##@ Install
 ##  -------
 
-install: .nx-install ## Install locally the application
+install: .nx-install .poetry-install ## Install locally the application
 	@echo "===> $@ <==="
 	@nx run-many -t install
 .PHONY: install
 
-build: .nx-install ## Build the application
+build: .nx-install .poetry-install ## Build the application
 	@echo "===> $@ <==="
 	@nx run-many -t build
 .PHONY: build
@@ -19,12 +19,12 @@ build: .nx-install ## Build the application
 ##@ Quality
 ##  -------
 
-test: .nx-install ## Run all tests
+test: .nx-install .poetry-install ## Run all tests
 	@echo "===> $@ <==="
 	@nx run-many -t test --parallel=5
 .PHONY: test
 
-lint: .nx-install ## Run all linter
+lint: .nx-install .poetry-install ## Run all linter
 	@echo "===> $@ <==="
 	@nx run-many -t lint --parallel=5
 .PHONY: lint
@@ -45,9 +45,20 @@ run: ## Run locally the application
 .nx-install:
 	@echo "===> $@ <==="
 	@echo "Node version:"
-	@if ! node --version ; then echo "Node not installed /!\\"; fi
-	@if ! nx --version ; then npm i -g nx; fi
+	@if ! node --version ; then echo "Node not installed /!\\" && false; fi
+	@echo "Nx version:"
+	@if ! nx --version ; then npm i nx; fi
 .PHONY: .nx-install
+
+.poetry-install:
+	@echo "===> $@ <==="
+	@echo "Python version:"
+	@if ! python --version ; then echo "Python not installed /!\\" && false; fi
+	@echo "PIP version:"
+	@if ! pip --version ; then echo "PIP not installed /!\\" && false; fi
+	@echo "Poetry version:"
+	@if ! poetry --version ; then pip install poetry; fi
+.PHONY: .poetry-install
 
 .DEFAULT_GOAL := help
 APPLICATION_TITLE := Astraeus \n ========

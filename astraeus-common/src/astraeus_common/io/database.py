@@ -1,10 +1,10 @@
 import os
 import sys
-from typing import List
+from typing import List, Optional, Dict, Any
 
 import psycopg2
 import structlog
-from psycopg2.extras import DictCursor
+from psycopg2.extras import DictCursor, DictRow
 from yoyo import get_backend, read_migrations
 
 from . import db
@@ -63,7 +63,7 @@ class Database:
             self._log.critical(f'Error occur on connection to database - \n {error}')
             sys.exit(1)
 
-    def exec_db_read(self, query: str, param: dict = None) -> List[dict]:
+    def exec_db_read(self, query: str, param: Optional[Dict[str, Any]] = None) -> List[DictRow]:
         log_query = query.replace('\n', '')
         try:
             with self.__db_connection() as connection:
@@ -74,6 +74,7 @@ class Database:
                     return cursor.fetchall()
         except psycopg2.DatabaseError as error:
             self._log.warn(f'Error occur on read of {log_query} - {error}')
+            return []
 
     def exec_db_write(self, query: str, params: dict) -> None:
         log_query = query.replace('\n', '')

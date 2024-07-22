@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "elite-dangerous-astraeus"
+version = "0.1.0"
+description = ""
+authors = ["lavazais-sylvain <slavazais@pm.me>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+structlog = "^24.2.0"
+psycopg2 = "^2.9.9"
+yoyo-migrations = "^8.2.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,13 +1,14 @@
 import json
 from datetime import datetime
+from typing import Optional, Dict
 
 
 class SyncState:
-    _key: dict
-    _sync_date: datetime
-    _type: str
-    _sync_hash: str
-    _previous_state: dict
+    _key: Optional[Dict]
+    _sync_date: Optional[datetime]
+    _type: Optional[str]
+    _sync_hash: Optional[str]
+    _previous_state: Optional[Dict]
 
     SYNC_STATE_SELECT_BY_KEY = '''
     select key, sync_date, type, sync_hash
@@ -35,7 +36,7 @@ class SyncState:
     '''
 
     @property
-    def key(self) -> dict:
+    def key(self) -> Optional[Dict]:
         return self._key
 
     @key.setter
@@ -43,7 +44,7 @@ class SyncState:
         self._key = value
 
     @property
-    def sync_date(self) -> datetime:
+    def sync_date(self) -> Optional[datetime]:
         return self._sync_date
 
     @sync_date.setter
@@ -51,7 +52,7 @@ class SyncState:
         self._sync_date = value
 
     @property
-    def type(self) -> str:
+    def type(self) -> Optional[str]:
         return self._type
 
     @type.setter
@@ -59,7 +60,7 @@ class SyncState:
         self._type = value
 
     @property
-    def sync_hash(self) -> str:
+    def sync_hash(self) -> Optional[str]:
         return self._sync_hash
 
     @sync_hash.setter
@@ -67,19 +68,19 @@ class SyncState:
         self._sync_hash = value
 
     @property
-    def previous_state(self) -> dict:
+    def previous_state(self) -> Optional[Dict]:
         return self._previous_state
 
     @previous_state.setter
     def previous_state(self, value: dict):
         self._previous_state = value
 
-    def __init__(self, dict_from_db: dict = None,
-                 key: dict = None,
-                 sync_date: datetime = None,
-                 data_type: str = None,
-                 sync_hash: str = None,
-                 previous_state: dict = None):
+    def __init__(self, dict_from_db: Optional[Dict] = None,
+                 key: Optional[Dict] = None,
+                 sync_date: Optional[datetime] = None,
+                 data_type: Optional[str] = None,
+                 sync_hash: Optional[str] = None,
+                 previous_state: Optional[Dict] = None):
         if dict_from_db is not None:
             key = dict_from_db.get('key', None)
             sync_date = dict_from_db.get('sync_date', None)

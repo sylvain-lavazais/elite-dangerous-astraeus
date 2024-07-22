@@ -1,15 +1,16 @@
 import json
 from datetime import datetime
+from typing import Optional, Dict
 
 
 class System:
-    _key: dict
-    _name: str
-    _coordinates: dict
-    _require_permit: bool
-    _information: dict
-    _update_time: datetime
-    _primary_star: dict
+    _key: Optional[Dict]
+    _name: Optional[str]
+    _coordinates: Optional[Dict]
+    _require_permit: Optional[bool]
+    _information: Optional[Dict]
+    _update_time: Optional[datetime]
+    _primary_star: Optional[Dict]
 
     SYSTEM_SELECT_BY_KEY = '''
     select key, name, coordinates, require_permit,
@@ -43,7 +44,7 @@ class System:
     '''
 
     @property
-    def key(self) -> dict:
+    def key(self) -> Optional[Dict]:
         return self._key
 
     @key.setter
@@ -51,7 +52,7 @@ class System:
         self._key = value
 
     @property
-    def name(self) -> str:
+    def name(self) -> Optional[str]:
         return self._name
 
     @name.setter
@@ -59,7 +60,7 @@ class System:
         self._name = value
 
     @property
-    def coordinates(self) -> dict:
+    def coordinates(self) -> Optional[Dict]:
         return self._coordinates
 
     @coordinates.setter
@@ -67,7 +68,7 @@ class System:
         self._coordinates = value
 
     @property
-    def require_permit(self) -> bool:
+    def require_permit(self) -> Optional[bool]:
         return self._require_permit
 
     @require_permit.setter
@@ -75,7 +76,7 @@ class System:
         self._require_permit = value
 
     @property
-    def information(self) -> dict:
+    def information(self) -> Optional[Dict]:
         return self._information
 
     @information.setter
@@ -83,7 +84,7 @@ class System:
         self._information = value
 
     @property
-    def update_time(self) -> datetime:
+    def update_time(self) -> Optional[datetime]:
         return self._update_time
 
     @update_time.setter
@@ -91,7 +92,7 @@ class System:
         self._update_time = value
 
     @property
-    def primary_star(self) -> dict:
+    def primary_star(self) -> Optional[Dict]:
         return self._primary_star
 
     @primary_star.setter
@@ -99,14 +100,14 @@ class System:
         self._primary_star = value
 
     def __init__(self,
-                 dict_from_db: dict = None,
-                 key: dict = None,
-                 name: str = None,
-                 coordinates: dict = None,
-                 require_permit: bool = None,
-                 information: dict = None,
-                 update_time: datetime = None,
-                 primary_star: dict = None):
+                 dict_from_db: Optional[Dict] = None,
+                 key: Optional[Dict] = None,
+                 name: Optional[str] = None,
+                 coordinates: Optional[Dict] = None,
+                 require_permit: Optional[bool] = None,
+                 information: Optional[Dict] = None,
+                 update_time: Optional[datetime] = None,
+                 primary_star: Optional[Dict] = None):
         if dict_from_db is not None:
             key = dict_from_db.get('key', None)
             name = dict_from_db.get('name', None)
