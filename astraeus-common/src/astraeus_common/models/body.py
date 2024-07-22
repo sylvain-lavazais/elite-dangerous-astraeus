@@ -1,22 +1,23 @@
 import json
 from datetime import datetime
+from typing import Optional, Dict
 
 
 class Body:
-    _key: dict
-    _system_key: dict
-    _name: str
-    _type: str
-    _sub_type: str
-    _discovery: dict
-    _update_time: datetime
-    _materials: dict
-    _solid_composition: dict
-    _atmosphere_composition: dict
-    _parents: dict
-    _belts: dict
-    _rings: dict
-    _properties: dict
+    _key: Optional[Dict]
+    _system_key: Optional[Dict]
+    _name: Optional[str]
+    _type: Optional[str]
+    _sub_type: Optional[str]
+    _discovery: Optional[Dict]
+    _update_time: Optional[datetime]
+    _materials: Optional[Dict]
+    _solid_composition: Optional[Dict]
+    _atmosphere_composition: Optional[Dict]
+    _parents: Optional[Dict]
+    _belts: Optional[Dict]
+    _rings: Optional[Dict]
+    _properties: Optional[Dict]
 
     BODY_SELECT_BY_KEY = '''
     select key, system_key, name, type,
@@ -72,7 +73,7 @@ class Body:
     '''
 
     @property
-    def key(self) -> dict:
+    def key(self) -> Optional[Dict]:
         return self._key
 
     @key.setter
@@ -80,7 +81,7 @@ class Body:
         self._key = value
 
     @property
-    def system_key(self) -> dict:
+    def system_key(self) -> Optional[Dict]:
         return self._system_key
 
     @system_key.setter
@@ -88,7 +89,7 @@ class Body:
         self._system_key = value
 
     @property
-    def name(self) -> str:
+    def name(self) -> Optional[str]:
         return self._name
 
     @name.setter
@@ -96,7 +97,7 @@ class Body:
         self._name = value
 
     @property
-    def type(self) -> str:
+    def type(self) -> Optional[str]:
         return self._type
 
     @type.setter
@@ -104,7 +105,7 @@ class Body:
         self._type = value
 
     @property
-    def sub_type(self) -> str:
+    def sub_type(self) -> Optional[str]:
         return self._sub_type
 
     @sub_type.setter
@@ -112,7 +113,7 @@ class Body:
         self.sub_type = value
 
     @property
-    def discovery(self) -> dict:
+    def discovery(self) -> Optional[Dict]:
         return self._discovery
 
     @discovery.setter
@@ -120,7 +121,7 @@ class Body:
         self._discovery = value
 
     @property
-    def update_time(self) -> datetime:
+    def update_time(self) -> Optional[datetime]:
         return self._update_time
 
     @update_time.setter
@@ -128,7 +129,7 @@ class Body:
         self._update_time = value
 
     @property
-    def materials(self) -> dict:
+    def materials(self) -> Optional[Dict]:
         return self._materials
 
     @materials.setter
@@ -136,7 +137,7 @@ class Body:
         self._materials = value
 
     @property
-    def solid_composition(self) -> dict:
+    def solid_composition(self) -> Optional[Dict]:
         return self._solid_composition
 
     @solid_composition.setter
@@ -144,7 +145,7 @@ class Body:
         self._solid_composition = value
 
     @property
-    def atmosphere_composition(self) -> dict:
+    def atmosphere_composition(self) -> Optional[Dict]:
         return self._atmosphere_composition
 
     @atmosphere_composition.setter
@@ -152,7 +153,7 @@ class Body:
         self._atmosphere_composition = value
 
     @property
-    def parents(self) -> dict:
+    def parents(self) -> Optional[Dict]:
         return self._parents
 
     @parents.setter
@@ -160,7 +161,7 @@ class Body:
         self._parents = value
 
     @property
-    def belts(self) -> dict:
+    def belts(self) -> Optional[Dict]:
         return self._belts
 
     @belts.setter
@@ -168,7 +169,7 @@ class Body:
         self._belts = value
 
     @property
-    def rings(self) -> dict:
+    def rings(self) -> Optional[Dict]:
         return self._rings
 
     @rings.setter
@@ -176,28 +177,29 @@ class Body:
         self._rings = value
 
     @property
-    def properties(self) -> dict:
+    def properties(self) -> Optional[Dict]:
         return self._properties
 
     @properties.setter
     def properties(self, value: dict):
         self._properties = value
 
-    def __init__(self, dict_from_db: dict = None,
-                 key: dict = None,
-                 system_key: dict = None,
-                 name: str = None,
-                 body_type: str = None,
-                 sub_type: str = None,
-                 discovery: dict = None,
-                 update_time: datetime = None,
-                 materials: dict = None,
-                 solid_composition: dict = None,
-                 atmosphere_composition: dict = None,
-                 parents: dict = None,
-                 belts: dict = None,
-                 rings: dict = None,
-                 properties: dict = None):
+    def __init__(self,
+                 dict_from_db: Optional[Dict] = None,
+                 key: Optional[Dict] = None,
+                 system_key: Optional[Dict] = None,
+                 name: Optional[str] = None,
+                 body_type: Optional[str] = None,
+                 sub_type: Optional[str] = None,
+                 discovery: Optional[Dict] = None,
+                 update_time: Optional[datetime] = None,
+                 materials: Optional[Dict] = None,
+                 solid_composition: Optional[Dict] = None,
+                 atmosphere_composition: Optional[Dict] = None,
+                 parents: Optional[Dict] = None,
+                 belts: Optional[Dict] = None,
+                 rings: Optional[Dict] = None,
+                 properties: Optional[Dict] = None):
         if dict_from_db is not None:
             key = dict_from_db.get('key', None)
             system_key = dict_from_db.get('system_key', None)

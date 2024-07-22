@@ -48,7 +48,7 @@
     "lint": {
       "executor": "@nxlv/python:run-commands",
       "options": {
-        "command": "poetry run flake8 --config ../.github/linters/.flake8 ./src ./test",
+        "command": "poetry run flake8 --config ../.github/linters/.flake8.ini ./src ./test && poetry run mypy . --config-file ../.github/linters/.mypy.ini",
         "cwd": "astraeus-common"
       }
     },
